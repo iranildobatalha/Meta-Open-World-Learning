@@ -1,1 +1,1 @@
-{"seed":0, "batch_size": 256, "model_type": "l2ac", "top_n": 5, "ncls": 10,"set_mode": "train1", "db": "amazon", "out_dir": "../runs/l2ac_5_10/0/", "set_modes": ["test_25", "test_50", "test_75"], "vote_n": 1}
+{"seed":0, "batch_size": 256, "model_type": "l2ac", "top_n": 5, "ncls": 10,"set_mode": "train1", "db": "amazon", "out_dir": "../runs/l2ac_5_10/0/", "set_modes": ["test_50", "test_75"], "vote_n": 1}
