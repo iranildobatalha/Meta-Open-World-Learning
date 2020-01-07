@@ -71,7 +71,7 @@ def pred_evaluate(config):
     scores={'weighted_f1': weighted_f1, 'macro_f1': macro_f1, 'micro_f1': micro_f1}
 
     K.clear_session() 
-    print scores["weighted_f1"]
+    print(scores["weighted_f1"])
     with open(out_dir+"valid.json", "w") as fw:
         json.dump(scores, fw)
 

@@ -7,7 +7,7 @@ import tensorflow as tf
 from keras import backend as K
 
 
-def train(config):    
+def train(config):   
     batch_size=config['batch_size']
     top_n=config["top_n"] #10
     model_type=config['model_type']
@@ -50,6 +50,7 @@ def train(config):
     if top_n>1: #do not use lstm when only have one example per class
         x_rep=keras.layers.Dense(1, activation="sigmoid")(x_rep)
         x_rep=keras.layers.Bidirectional(keras.layers.CuDNNLSTM(1) )(x_rep)
+        #x_rep=keras.layers.Bidirectional(keras.layers.LSTM(1) )(x_rep)
     else:
         x_rep=keras.layers.Reshape((-1,) )(x_rep)
     output=keras.layers.Dense(1, activation="sigmoid")(x_rep)
@@ -60,6 +61,9 @@ def train(config):
     x1=keras.Input(shape=(train_X1.shape[1],), dtype="int32" )
     x1_rep=mem_layer(x1)
     output=matching_model([x_rep, x1_rep])
+    # We need to clear the session to enable JIT in the middle of the program.
+    keras.backend.clear_session()
+    tf.config.optimizer.set_jit(True)  # Enable XLA.
     train_model=keras.engine.Model([x, x1], output)
     train_model.compile(loss="binary_crossentropy", optimizer=keras.optimizers.Adam(lr=0.0001), metrics=["acc"])
     

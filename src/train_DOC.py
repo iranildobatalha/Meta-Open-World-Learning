@@ -39,6 +39,7 @@ def train(config):
         if "lstm_512" in model_type:
             x_rep=keras.layers.Dropout(0.5)(x_rep)
             lstm_layer2=keras.layers.Bidirectional(keras.layers.CuDNNLSTM(256) )
+            #lstm_layer2=keras.layers.Bidirectional(keras.layers.LSTM(256) )
             enc=keras.layers.Activation('relu')(lstm_layer2(x_rep) )
         elif "cnn" in model_type:
             graph_in = keras.Input(shape=(data['train_set_idx_X'].shape[1],  glove_pre_trained.shape[1]))
@@ -60,6 +61,9 @@ def train(config):
 
         x_rep=keras.layers.Dropout(0.5)(enc)
         output=keras.layers.Dense(data['train_set_Y'].max()+1, activation="sigmoid")(x_rep)
+        # We need to clear the session to enable JIT in the middle of the program.
+        keras.backend.clear_session()
+        tf.config.optimizer.set_jit(True)  # Enable XLA.
         model=keras.engine.Model(x, output)
         model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["acc"])
         history=model.fit(train_X, train_Y, 
