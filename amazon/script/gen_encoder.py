@@ -4,6 +4,7 @@ import numpy as np
 import nltk
 import sklearn
 import keras
+import tensorflow as tf
 import json
 import scipy
 from collections import defaultdict

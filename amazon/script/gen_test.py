@@ -7,7 +7,7 @@ import json
 import scipy
 from collections import defaultdict
 import gen_util
-import keras
+import tensorflow as tf
 random.seed(1337)
 
 path="../big_domain_desc/"

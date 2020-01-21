@@ -5,6 +5,7 @@ import nltk
 import sklearn
 import keras
 import scipy
+import tensorflow as tf
 
 #class set sampling
 def gen_run_sets(run, classes, group_sizes):

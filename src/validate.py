@@ -13,7 +13,7 @@ def l2ac_predict(model, data, top_n, vote_n=1):
     test_X, test_X1=data['test_X0'], data['test_X1']
     y_pred=[]
     for ix in range(test_X1.shape[1]): #through all candidate classes
-        if vote_n>1:
+        if vote_n > 1:
             n_pred=[]
             for jx in range(-vote_n, 0):
                 n_pred.append(model.predict([test_X, test_X1[:,ix,jx].reshape(-1,1) ] ) )
@@ -71,7 +71,7 @@ def pred_evaluate(config):
     scores={'weighted_f1': weighted_f1, 'macro_f1': macro_f1, 'micro_f1': micro_f1}
 
     K.clear_session() 
-    print scores["weighted_f1"]
+    print(scores["weighted_f1"])
     with open(out_dir+"valid.json", "w") as fw:
         json.dump(scores, fw)
 
