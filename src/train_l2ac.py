@@ -7,7 +7,7 @@ import tensorflow as tf
 from keras import backend as K
 
 
-def train(config):    
+def train(config):   
     batch_size=config['batch_size']
     top_n=config["top_n"] #10
     model_type=config['model_type']
@@ -50,6 +50,7 @@ def train(config):
     if top_n>1: #do not use lstm when only have one example per class
         x_rep=keras.layers.Dense(1, activation="sigmoid")(x_rep)
         x_rep=keras.layers.Bidirectional(keras.layers.CuDNNLSTM(1) )(x_rep)
+        #x_rep=keras.layers.Bidirectional(keras.layers.LSTM(1) )(x_rep)
     else:
         x_rep=keras.layers.Reshape((-1,) )(x_rep)
     output=keras.layers.Dense(1, activation="sigmoid")(x_rep)

@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
     //"python.pythonPath": "C:\\Users\\cris\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
     "python.pythonPath": "C:\\Users\\cris\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
+=======
+    "python.pythonPath": "/home/iranildo/anaconda3/envs/paic/bin/python"
+>>>>>>> 6a0e9d8b207d77279dd2eca389dd59d8b3d62ae2
 }
